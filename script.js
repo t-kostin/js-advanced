@@ -202,7 +202,7 @@ class Burger {
             if (this.topping[index].quantity > 1) {
                 this.topping[index].quantity--;
             } else {
-                this.topping.splice(itemIndex, 1);
+                this.topping.splice(index, 1);
             }
         } 
     }
@@ -249,8 +249,17 @@ console.log(testBurger.getCalories()); // expected 60
 testBurger.changeSize('small');
 testBurger.changeStuffing('potato');
 testBurger.addTopping('spice');
-console.log(testBurger.getPrice());
-console.log(testBurger.getCalories());
+testBurger.addTopping('spice');
+console.log(testBurger.getPrice()); // expected 95
+console.log(testBurger.getCalories()); // expected 30
 console.log(testBurger.getStuffing()); // expected potato
 console.log(testBurger.getSize()); // expected small
-
+testBurger.addTopping('mayonnaise');
+testBurger.removeTopping('spice');
+console.log(testBurger.getPrice()); // expected 100
+console.log(testBurger.getCalories()); // expected 35
+testBurger.removeTopping('spice');
+testBurger.removeTopping('spice');
+testBurger.removeTopping('spice');
+console.log(testBurger.getPrice()); // expected 85
+console.log(testBurger.getCalories()); // expected 35
