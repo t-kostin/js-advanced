@@ -128,6 +128,12 @@ class Basket {
     getTotalQuantity() {
         return this.items.map(item => item.quantity).reduce(this.summarize, 0);
     }
+    render() {
+        let listHtml = this.items.map(item => item.render()).join('\n');
+        let totalPrice = this.getTotalPrice();
+        listHtml += `<h3>Общая стоимость товаров: ${totalPrice}</h3>`;
+        document.querySelector('.basket-list').innerHTML = listHtml;
+    }
 }
 
 class BasketItem {
@@ -136,6 +142,9 @@ class BasketItem {
         this.product_name = product_name;
         this.price = price;
         this.quantity = quantity;
+    }
+    render() {
+        return `<div class="basket-item"><p>3${this.product_name}, Цена: ${this.price}, Количество: ${this.quantity}</p></div>`;
     }
 }
 
@@ -165,4 +174,5 @@ makeGetRequest(`${API_URL}/catalogData.json`)
         console.log(testBasket.getItemQuantity(testGoods[0])); // expected 0
         console.log(testBasket.getItemQuantity(testGoods[1])); // expected 3
         console.log(testBasket.getTotalPrice(testGoods[1])); // expected 3000
+        testBasket.render();
     });
