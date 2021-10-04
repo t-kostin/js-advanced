@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>eShop</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <header class="container">
+            <div class="basket-list">
+            </div>
+            <button class="cart-button" type="button">Корзина</button>
+        </header>
+        <hr>
+        <main>
+            <div class="goods-list">
+            </div>
+            <hr>
+            <form action="#" id="my-form">
+                <label for="name">Name</label><br>
+                <input type="text" maxlength="32" id="name"><br>
+                <label for="phone">Phone</label><br>
+                <input type="tel" maxlength="15" id="phone"><br>
+                <label for="email">Email</label><br>
+                <input type="email" maxlength="320" id="email"><br>
+                <label for="text">Some text</label><br>
+                <textarea id="text" cols="22" rows="6"></textarea><br><br>
+                <input type="submit" value="Send">
+                <p id="err-message" class="red-text hidden">Error in form</p>
+            </form>
+        </main>
+    </body>
+</html>
