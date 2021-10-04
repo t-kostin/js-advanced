@@ -25,3 +25,12 @@
     padding: 5px;
     background-color: silver;
 }
+.error-mark {
+    border-color: red;
+}
+.hidden {
+    visibility: hidden;
+}
+.red-text {
+    color: red;
+}

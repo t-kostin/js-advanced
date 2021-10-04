@@ -2,28 +2,6 @@
 
 const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
 
-/*
- * Асинхронность через callbacks
- *
-function makeGetRequest(url, callback) {
-    var xhr;
-    if (window.XMLHttpRequest) {
-        xhr = new XMLHttpRequest();
-    } else if (window.ActiveXObject) {
-        xhr = new ActiveXObject('Microsoft.XMLHTTP');
-    }
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-            callback(xhr.responseText);
-        }
-    };
-    xhr.open('GET', url, true);
-    xhr.send();
-}
- */
-
-// Асинхронность через Promise (задание 1)
-
 function makeGetRequest(url) {
     return new Promise((resolve) => {
         var xhr;
@@ -42,7 +20,6 @@ function makeGetRequest(url) {
     });
 }
 
-
 class GoodsItem {
     constructor({id_product, product_name, price}) {
         this.id_product = id_product
@@ -58,7 +35,6 @@ class GoodsList {
     constructor() {
         this.goods = [];
     }
-    // fetchGoods() возвращает Promise (задание 3)
     fetchGoods() {
         return makeGetRequest(`${API_URL}/catalogData.json`).then ((goods) => {
             this.goods = JSON.parse(goods).map(item => {return new GoodsItem(item)});
@@ -71,12 +47,7 @@ class GoodsList {
 }
 
 const list = new GoodsList();
-// render() вызывается в обработчике Promise, который возвращает fetchGoods() (задание 3)
 list.fetchGoods().then(()=> {list.render();});
-
-/*
- * Задание 2 - корзина и элемент корзиных
- */
 
 class Basket {
     constructor() {
@@ -144,35 +115,62 @@ class BasketItem {
         this.quantity = quantity;
     }
     render() {
-        return `<div class="basket-item"><p>3${this.product_name}, Цена: ${this.price}, Количество: ${this.quantity}</p></div>`;
+        return `<div class="basket-item"><p>${this.product_name}, Цена: ${this.price}, Количество: ${this.quantity}</p></div>`;
     }
 }
 
 /*
- * Элементарное тестирование работы методов корзины
+ * Урок 4 - задания 1 и 2. Замена прямой речи в однинарных кавычках. Апострофы в
+ * конструкциях "isn't", "I've" и т.д. не трогаем.
  */
-console.log('Basket testing');
-let testGoods;
-makeGetRequest(`${API_URL}/catalogData.json`)
-    .then ((goods) => {
-        testGoods = JSON.parse(goods).map(item => {return new GoodsItem(item)});
-    }).then(() => {
-        const testBasket = new Basket();
-        testBasket.addItem(testGoods[0]);
-        console.log(testBasket.getTotalQuantity()); // expected 1
-        console.log(testBasket.getTotalPrice()); // expected 45600
-        testBasket.addItem(testGoods[1], 4);
-        console.log(testBasket.getTotalQuantity()); // expected 5
-        console.log(testBasket.getTotalPrice()); // expected 49600
-        testBasket.incrementQuantity(testGoods[0]);
-        testBasket.decrementQuantity(testGoods[1]);
-        console.log(testBasket.getTotalQuantity()); // expected 5 
-        console.log(testBasket.getTotalPrice()); // expected 94200
-        console.log(testBasket.getItemQuantity(testGoods[0])); // expected 2
-        console.log(testBasket.getItemQuantity(testGoods[1])); // expected 3
-        testBasket.removeItem(testGoods[0]);
-        console.log(testBasket.getItemQuantity(testGoods[0])); // expected 0
-        console.log(testBasket.getItemQuantity(testGoods[1])); // expected 3
-        console.log(testBasket.getTotalPrice(testGoods[1])); // expected 3000
-        testBasket.render();
+
+makeGetRequest('http://151.248.113.248:8000/lesson-4-text.txt').
+    then((testText) => {
+        console.log(`Original text:\n${testText}`);
+        let searchPattern = /(')((I'|[A-Z])([^']+|[Ia-z]'[a-z])+[\.,\?\!])(')/g;
+        let newText = testText.replace(searchPattern, '"$2"');
+        console.log(`\n\nChanged text:\n${newText}`);
     });
+
+/*
+ * Урок 4 - задание 3. Форма обратной связи.
+ * По заданию домен почты всегда равен mail.ru. Для более сложного варианта проверки почты со
+ * всех доменов первого уровня регулярное выражение будет выглядеть так:
+ * /^[a-z]+(\.|-)?[a-z]+@([a-z0-9]+-?)*[a-z0-9]\.[a-z]{2,}$/i
+ */
+
+const myForm = document.getElementById('my-form');
+myForm.addEventListener('submit', validateForm);
+
+function validateForm(event) {
+    event.preventDefault();
+
+    const formPatterns = [
+        { field: 'name', regex: /^[a-z]{2,}$/i },
+        { field: 'email', regex: /^[a-z]+(\.|-)?[a-z]+@mail\.ru/i },
+        { field: 'phone', regex: /^\+7\([0-9]{3}\)[0-9]{3}-[0-9]{4}$/ }
+    ];
+
+    const isFormValid = formPatterns.
+        map(validateField).
+        reduce((previous, current) => previous && current);
+
+    let message = document.getElementById('err-message');
+    if (isFormValid) {
+        message.classList.add('hidden');
+        // Send validated form
+    } else {
+        message.classList.remove('hidden');
+        // Form doesn't validated
+    }
+}
+
+function validateField({field, regex}) {
+    const isFieldValid = regex.test(myForm[field].value.trim());
+    if (isFieldValid) {
+        myForm[field].classList.remove('error-mark');
+    } else {
+        myForm[field].classList.add('error-mark');
+    }
+    return isFieldValid;
+}
