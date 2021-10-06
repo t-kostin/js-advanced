@@ -2,6 +2,8 @@
 
 const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
 
+
+/*
 function makeGetRequest(url) {
     return new Promise((resolve) => {
         var xhr;
@@ -48,6 +50,7 @@ class GoodsList {
 
 const list = new GoodsList();
 list.fetchGoods().then(()=> {list.render();});
+*/
 
 class Basket {
     constructor() {
@@ -119,58 +122,53 @@ class BasketItem {
     }
 }
 
-/*
- * Урок 4 - задания 1 и 2. Замена прямой речи в однинарных кавычках. Апострофы в
- * конструкциях "isn't", "I've" и т.д. не трогаем.
- */
-
-makeGetRequest('http://151.248.113.248:8000/lesson-4-text.txt').
-    then((testText) => {
-        console.log(`Original text:\n${testText}`);
-        let searchPattern = /(')((I'|[A-Z])([^']+|[Ia-z]'[a-z])+[\.,\?\!])(')/g;
-        let newText = testText.replace(searchPattern, '"$2"');
-        console.log(`\n\nChanged text:\n${newText}`);
-    });
-
-/*
- * Урок 4 - задание 3. Форма обратной связи.
- * По заданию домен почты всегда равен mail.ru. Для более сложного варианта проверки почты со
- * всех доменов первого уровня регулярное выражение будет выглядеть так:
- * /^[a-z]+(\.|-)?[a-z]+@([a-z0-9]+-?)*[a-z0-9]\.[a-z]{2,}$/i
- */
-
-const myForm = document.getElementById('my-form');
-myForm.addEventListener('submit', validateForm);
-
-function validateForm(event) {
-    event.preventDefault();
-
-    const formPatterns = [
-        { field: 'name', regex: /^[a-z]{2,}$/i },
-        { field: 'email', regex: /^[a-z]+(\.|-)?[a-z]+@mail\.ru/i },
-        { field: 'phone', regex: /^\+7\([0-9]{3}\)[0-9]{3}-[0-9]{4}$/ }
-    ];
-
-    const isFormValid = formPatterns.
-        map(validateField).
-        reduce((previous, current) => previous && current);
-
-    let message = document.getElementById('err-message');
-    if (isFormValid) {
-        message.classList.add('hidden');
-        // Send validated form
-    } else {
-        message.classList.remove('hidden');
-        // Form doesn't validated
+const app = new Vue({
+    el: '#app',
+    data: {
+        goods: [],
+        filteredGoods: [],
+        searchLine: '',
+        isVisibleBasket: false
+    },
+    methods: {
+        makeGetRequest(url) {
+            return new Promise((resolve) => {
+                var xhr;
+                if (window.XMLHttpRequest) {
+                    xhr = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    xhr = new ActiveXObject('Microsoft.XMLHTTP');
+                }
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState === 4) {
+                        resolve(xhr.responseText);
+                    }
+                };
+                xhr.open('GET', url, true);
+                xhr.send();
+            });
+        },
+        searchHandler() {
+            if (this.searchLine === '') {
+                this.filteredGoods = this.goods;
+            } else {
+                const compareLine = this.searchLine.trim().toLowerCase();
+                this.filteredGoods = this.goods.filter(item => {
+                    return item.product_name.toLowerCase().includes(compareLine);
+                });
+                this.searchLine = '';
+            }
+        },
+        basketHandler() {
+            this.isVisibleBasket = !this.isVisibleBasket;
+        }
+    },
+    mounted() {
+        this.makeGetRequest(`${API_URL}/catalogData.json`).
+            then((goods) => {
+                this.goods = JSON.parse(goods);
+                this.filteredGoods = this.goods;
+            });
     }
-}
+});
 
-function validateField({field, regex}) {
-    const isFieldValid = regex.test(myForm[field].value.trim());
-    if (isFieldValid) {
-        myForm[field].classList.remove('error-mark');
-    } else {
-        myForm[field].classList.add('error-mark');
-    }
-    return isFieldValid;
-}

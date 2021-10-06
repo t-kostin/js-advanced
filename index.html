@@ -6,31 +6,55 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
         <script src="script.js" defer></script>
     </head>
     <body>
-        <header class="container">
-            <div class="basket-list">
-            </div>
-            <button class="cart-button" type="button">Корзина</button>
-        </header>
-        <hr>
-        <main>
-            <div class="goods-list">
-            </div>
-            <hr>
-            <form action="#" id="my-form">
-                <label for="name">Name</label><br>
-                <input type="text" maxlength="32" id="name"><br>
-                <label for="phone">Phone</label><br>
-                <input type="tel" maxlength="15" id="phone"><br>
-                <label for="email">Email</label><br>
-                <input type="email" maxlength="320" id="email"><br>
-                <label for="text">Some text</label><br>
-                <textarea id="text" cols="22" rows="6"></textarea><br><br>
-                <input type="submit" value="Send">
-                <p id="err-message" class="red-text hidden">Error in form</p>
-            </form>
-        </main>
+        <div id="app">
+            <header>
+                <div class="container">
+                    <input type="text" class="goods-search" v-model="searchLine">
+                    <button class="cart-button" type="button" @click="searchHandler">Поиск</button>
+                    <button class="cart-button" type="button" @click="basketHandler">Корзина</button>
+                </div>
+                <div class="basket" v-if="isVisibleBasket">
+                    <hr>
+                    <div class="container-basket">
+                        <div class="item-name first-row">Goods name</div>
+                        <div class="item-price first-row">Price</div>
+                        <div class="item-quantity first-row">Quantity</div>
+                        <div class="item-total first-row">Total</div>
+                    </div>
+                    <div class="container-basket">
+                        <div class="item-name">Lorem ipsum</div>
+                        <div class="item-price">00000.00&nbsp;₽</div>
+                        <div class="item-quantity">0</div>
+                        <div class="item-total">00000.00&nbsp;₽</div>
+                    </div>
+                    <div class="container-basket">
+                        <div class="item-name">Lorem ipsum</div>
+                        <div class="item-price">00000.00&nbsp;₽</div>
+                        <div class="item-quantity">0</div>
+                        <div class="item-total">00000.00&nbsp;₽</div>
+                    </div>
+                    <div class="container-basket">
+                        <div class="basket-total">SUBTOTAL</div>
+                        <div class="basket-total">00000.00&nbsp;₽</div>
+                    </div>
+                </div>
+            </header>
+            <main>
+                <hr>
+                <div class="goods-list" v-if="filteredGoods.length > 0">
+                    <div class="goods-item" v-for="good in filteredGoods">
+                        <h3>{{ good.product_name }}</h3>
+                        <p>{{ good.price }}</p>
+                    </div>
+                </div>
+                <h3 v-else>
+                    List of goods is empty.
+                </h3>
+            </main>
+        </div>
     </body>
 </html>
