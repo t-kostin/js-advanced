@@ -33,6 +33,9 @@ button:hover {
     border: 1px solid grey;
     width: 300px;
 }
+input.goods-search:active {
+    border: 1px solid grey;
+}
 .no-display {
     display: none;
 }
@@ -60,6 +63,11 @@ button:hover {
 .basket-total {
     font-weight: bold;
     border-top:  2px solid darkgrey;
+}
+.basket-no-items {
+    text-align: right;
+    font-weight: bold;
+    width: 220px;
 }
 .goods-list {
     display: flex;

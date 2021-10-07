@@ -13,47 +13,30 @@
         <div id="app">
             <header>
                 <div class="container">
-                    <input type="text" class="goods-search" v-model="searchLine">
-                    <button class="cart-button" type="button" @click="searchHandler">Поиск</button>
+                    <goods-search></goods-search>
                     <button class="cart-button" type="button" @click="basketHandler">Корзина</button>
                 </div>
-                <div class="basket" v-if="isVisibleBasket">
+                <div v-if="isVisibleBasket">
                     <hr>
-                    <div class="container-basket">
-                        <div class="item-name first-row">Goods name</div>
-                        <div class="item-price first-row">Price</div>
-                        <div class="item-quantity first-row">Quantity</div>
-                        <div class="item-total first-row">Total</div>
-                    </div>
-                    <div class="container-basket">
-                        <div class="item-name">Lorem ipsum</div>
-                        <div class="item-price">00000.00&nbsp;₽</div>
-                        <div class="item-quantity">0</div>
-                        <div class="item-total">00000.00&nbsp;₽</div>
-                    </div>
-                    <div class="container-basket">
-                        <div class="item-name">Lorem ipsum</div>
-                        <div class="item-price">00000.00&nbsp;₽</div>
-                        <div class="item-quantity">0</div>
-                        <div class="item-total">00000.00&nbsp;₽</div>
-                    </div>
-                    <div class="container-basket">
-                        <div class="basket-total">SUBTOTAL</div>
-                        <div class="basket-total">00000.00&nbsp;₽</div>
+                    <basket v-if="basket.length > 0" :basket="basket">
+                    </basket>
+                    <div class="container-basket" v-else>
+                        <div class="basket-no-items">
+                            No items in the basket.
+                        </div>
                     </div>
                 </div>
             </header>
             <main>
                 <hr>
-                <div class="goods-list" v-if="filteredGoods.length > 0">
-                    <div class="goods-item" v-for="good in filteredGoods">
-                        <h3>{{ good.product_name }}</h3>
-                        <p>{{ good.price }}</p>
-                    </div>
+                <goods-list v-if="filteredGoods.length > 0" :goods="filteredGoods">
+                </goods-list>
+                <div v-else>
+                    <error-component :is_error="isServerError"></error-component>
+                    <h3>
+                        List of goods is empty.
+                    </h3>
                 </div>
-                <h3 v-else>
-                    List of goods is empty.
-                </h3>
             </main>
         </div>
     </body>
