@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>eShop</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <div id="app">
+            <header>
+                <div class="container">
+                    <goods-search></goods-search>
+                    <button class="cart-button" type="button" @click="basketHandler">Корзина</button>
+                </div>
+                <div v-if="isVisibleBasket">
+                    <hr>
+                    <basket v-if="basket.length > 0" :basket="basket">
+                    </basket>
+                    <div class="container-basket" v-else>
+                        <div class="basket-no-items">
+                            No items in the basket.
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main>
+                <hr>
+                <goods-list v-if="filteredGoods.length > 0" :goods="filteredGoods">
+                </goods-list>
+                <div v-else>
+                    <error-component :is_error="isServerError"></error-component>
+                    <h3>
+                        List of goods is empty.
+                    </h3>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>
