@@ -18,8 +18,18 @@
   background-color: grey;
   border: none;
   border-radius: 6px;
-  padding: 2px 2px;
+  padding: 12px 30px;
   margin: 0px 5px 0px 10px;
+  text-align: center;
+}
+.remove-button {
+  width: 92px;
+  height: 22px;
+  color: white;
+  background-color: grey;
+  border: none;
+  border-radius: 6px;
+  margin: 5px 4px 1px 4px;
   text-align: center;
 }
 button:hover {
@@ -51,7 +61,7 @@ input.goods-search:active {
 .item-name {
   width: 250px;
 }
-.item-name, .item-price, .item-quantity, .item-total, .basket-total {
+.item-name, .item-price, .item-quantity, .item-total, .basket-total, .basket-remove {
   height: auto;
   padding: 8px 2px;
   margin: 0px 5px 0px 10px;
@@ -59,6 +69,13 @@ input.goods-search:active {
 .item-price, .item-quantity, .item-total, .basket-total {
   text-align: right;
   width: 150px;
+}
+.item-empty-zone {
+  width: 92px;
+  margin: 5px 4px 1px 4px;
+}
+.basket-remove {
+  width: 120px;
 }
 .basket-total {
   font-weight: bold;
@@ -76,12 +93,33 @@ input.goods-search:active {
   padding: 20px;
 }
 .goods-item {
+  text-align: right;
+  display: block;
   margin: 10px;
   height: 200px;
-  width: 120px;
+  width: 218px;
   border-radius: 4px;
   padding: 5px;
   background-color: silver;
+}
+.goods-description {
+  text-align: left;
+  display: block;
+  margin: 0px;
+  padding: 0px;
+  height: 150px;
+  width: 208px;
+}
+.add-button {
+  width: 100px;
+  height: 28px;
+  color: white;
+  background-color: dimgrey;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 15px;
+  margin: 0px 1px 0px 10px;
+  text-align: center;
 }
 .error-mark {
   border-color: red;
