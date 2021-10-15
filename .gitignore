@@ -1,0 +1,2 @@
+# don't include node.js modules directory
+server/node_modules/

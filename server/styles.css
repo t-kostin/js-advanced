@@ -1,0 +1,132 @@
+.container {
+  display: flex;
+  justify-content: flex-end;
+}
+.cart-button {
+  width: 110px;
+  color: white;
+  background-color: grey;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 30px;
+  margin: 0px 5px 0px 10px;
+  text-align: center;
+}
+.search-button {
+  width: 110px;
+  color: white;
+  background-color: grey;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 30px;
+  margin: 0px 5px 0px 10px;
+  text-align: center;
+}
+.remove-button {
+  width: 92px;
+  height: 22px;
+  color: white;
+  background-color: grey;
+  border: none;
+  border-radius: 6px;
+  margin: 5px 4px 1px 4px;
+  text-align: center;
+}
+button:hover {
+  background-color: darkgrey;
+  cursor: pointer;
+}
+.goods-search {
+  border-radius: 6px;
+  padding: 10px 6px;
+  margin: 0px 5px 0px 10px;
+  border: 1px solid grey;
+  width: 300px;
+}
+input.goods-search:active {
+  border: 1px solid grey;
+}
+.no-display {
+  display: none;
+}
+.container-basket {
+  display: flex;
+  justify-content: flex-end;
+  font-family: sans-serif;
+}
+.first-row {
+  font-weight: bold;
+  border-bottom: 2px solid darkgrey;
+}
+.item-name {
+  width: 250px;
+}
+.item-name, .item-price, .item-quantity, .item-total, .basket-total, .basket-remove {
+  height: auto;
+  padding: 8px 2px;
+  margin: 0px 5px 0px 10px;
+}
+.item-price, .item-quantity, .item-total, .basket-total {
+  text-align: right;
+  width: 150px;
+}
+.item-empty-zone {
+  width: 92px;
+  margin: 5px 4px 1px 4px;
+}
+.basket-remove {
+  width: 120px;
+}
+.basket-total {
+  font-weight: bold;
+  border-top:  2px solid darkgrey;
+}
+.basket-no-items {
+  text-align: right;
+  font-weight: bold;
+  width: 220px;
+}
+.goods-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 20px;
+}
+.goods-item {
+  text-align: right;
+  display: block;
+  margin: 10px;
+  height: 200px;
+  width: 218px;
+  border-radius: 4px;
+  padding: 5px;
+  background-color: silver;
+}
+.goods-description {
+  text-align: left;
+  display: block;
+  margin: 0px;
+  padding: 0px;
+  height: 150px;
+  width: 208px;
+}
+.add-button {
+  width: 100px;
+  height: 28px;
+  color: white;
+  background-color: dimgrey;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 15px;
+  margin: 0px 1px 0px 10px;
+  text-align: center;
+}
+.error-mark {
+  border-color: red;
+}
+.hidden {
+  visibility: hidden;
+}
+.red-text {
+  color: red;
+}

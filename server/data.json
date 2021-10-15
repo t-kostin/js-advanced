@@ -1,0 +1,62 @@
+[
+  {
+    "id_product": 132709,
+    "product_name": "Acer 20\" V206HQLAB",
+    "price": 8700
+  },
+  {
+    "id_product": 206161,
+    "product_name": "Acer 35\" Predator Z35",
+    "price": 74860
+  },
+  {
+    "id_product": 400051,
+    "product_name": "AOC 27\" 27G2SAE",
+    "price": 22910 
+  },
+  {
+    "id_product": 289871,
+    "product_name": "ASUS 16\" MB16AC",
+    "price": 22280 
+  },
+  {
+    "id_product": 281108,
+    "product_name": "BenQ 27\" BL2780T",
+    "price": 18470
+  },
+  {
+    "id_product": 387793,
+    "product_name": "Dell 24\" S2422HG",
+    "price": 21490
+  },
+  {
+    "id_product": 366125,
+    "product_name": "Gigabyte 25\" Aorus FI25F",
+    "price": 34990
+  },
+  {
+    "id_product": 390855,
+    "product_name": "LG 29\" 29WP500-B",
+    "price": 18630
+  },
+  {
+    "id_product": 357093,
+    "product_name": "LG 43\" 43UN700-B",
+    "price": 64790
+  },
+  {
+    "id_product": 402117,
+    "product_name": "MSI 30\" Optix MAG301CR2",
+    "price": 29830
+  },
+  {
+    "id_product": 315401,
+    "product_name": "Neovo 19\" SC-19E Black",
+    "price": 19080
+  },
+  {
+    "id_product": 364620,
+    "product_name": "Philips 28\" 288E2A",
+    "price": 28150
+  }
+]
